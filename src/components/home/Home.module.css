@@ -1,0 +1,42 @@
+.homeContainer {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .homeHeader {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .clearButton {
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #dc143c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .clearButton:hover {
+    background-color: #c11b2e;
+  }
+  
+  .userTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .userTable th,
+  .userTable td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .userTable th {
+    background-color: #f5f5f5;
+  }
+  

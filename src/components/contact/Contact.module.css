@@ -1,0 +1,47 @@
+.contactWrapper {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .contactHeader {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .contactForm {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contactLabel {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .contactInput {
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  .contactButton {
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #2196f3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .contactButton:hover {
+    background-color: #1976d2;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  

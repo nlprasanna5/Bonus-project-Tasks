@@ -1,0 +1,79 @@
+.taskWrapper {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .taskHeader {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .taskForm {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .taskInput {
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  .taskButton {
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #2196f3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .taskButton:hover {
+    background-color: #1976d2;
+  }
+  
+  .taskList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .taskListItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .taskListItem:last-child {
+    margin-bottom: 0;
+  }
+  
+  .taskText {
+    flex: 1;
+    font-size: 16px;
+    overflow-wrap: break-word;
+  }
+  
+  .taskActions {
+    display: flex;
+  }
+  
+  .taskButtonSmall {
+    padding: 4px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 5px;
+    background-color: #2196f3;
+    color: #fff;
+    border: none;
+  }
+  
+  .taskButtonSmall:last-child {
+    margin-right: 0;
+  }
+  
+  .taskButtonSmall:hover {
+    background-color: #1976d2;
+  }
+  
