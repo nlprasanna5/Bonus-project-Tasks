@@ -1,106 +1,81 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodo,editTodo,deleteTodo } from '../../redux/todoSlice';
 import styles from './Task.module.css';
 
-const Task = () => {
-  const [tasks, setTasks] = useState([]);
-  const [taskInput, setTaskInput] = useState('');
-  const [editIndex, setEditIndex] = useState(-1);
-  const [editValue, setEditValue] = useState('');
+function Task() {
+  const [addInput, setAddInput] = useState('');
+  const [editInput, setEditInput] = useState('');
+  const [editTodoId, setEditTodoId] = useState(null);
+  const todos = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
 
-  const handleAddTask = () => {
-    if (taskInput) {
-      setTasks([...tasks, taskInput]);
-      setTaskInput('');
-    }
+  const handleAddSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addTodo({ id: Date.now(), title: addInput }));
+    setAddInput('');
   };
 
-  const handleDeleteTask = (index) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    setTasks(updatedTasks);
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+    dispatch(editTodo({ id: editTodoId, title: editInput }));
+    setEditTodoId(null);
+    setEditInput('');
   };
 
-  const handleEditTask = (index) => {
-    setEditIndex(index);
-    setEditValue(tasks[index]);
+  const handleEdit = (id, title) => {
+    setEditTodoId(id);
+    setEditInput(title);
   };
 
-  const handleUpdateTask = (index) => {
-    const updatedTasks = [...tasks];
-    updatedTasks[index] = editValue;
-    setTasks(updatedTasks);
-    setEditIndex(-1);
+  const handleDelete = (id) => {
+    dispatch(deleteTodo(id));
   };
 
   return (
     <div className={styles.taskWrapper}>
-      <h1 className={styles.taskHeader}>Task Page</h1>
-      <form className={styles.taskForm}>
+      <h1 className={styles.taskHeader}>Todo App</h1>
+      <form onSubmit={handleAddSubmit} className={styles.taskForm}>
         <input
-          className={styles.taskInput}
           type="text"
-          value={taskInput}
-          onChange={(e) => setTaskInput(e.target.value)}
-          placeholder="Enter task..."
+          placeholder="Enter todo"
+          value={addInput}
+          onChange={(e) => setAddInput(e.target.value)}
+          className={styles.taskInput}
         />
-        <button
-          className={styles.taskButton}
-          type="button"
-          onClick={handleAddTask}
-        >
-          Add Task
-        </button>
+        <button type="submit" className={styles.taskButton}>Add</button>
       </form>
       <ul className={styles.taskList}>
-        {tasks.map((task, index) => (
-          <li className={styles.taskListItem} key={index}>
-            {index === editIndex ? (
-              <input
-                className={styles.taskInput}
-                type="text"
-                value={editValue}
-                onChange={(e) => setEditValue(e.target.value)}
-              />
+        {todos.map((todo) => (
+          <li key={todo.id} className={styles.taskListItem}>
+            {editTodoId === todo.id ? (
+              <form onSubmit={handleEditSubmit}>
+                <input
+                  type="text"
+                  value={editInput}
+                  onChange={(e) => setEditInput(e.target.value)}
+                  className={styles.taskInput}
+                />
+                <button type="submit"
+                className={styles.taskSave}
+                >Save</button>
+              </form>
             ) : (
-              <span className={styles.taskText}>{task}</span>
+              <>
+              <span className={styles.taskText}>{todo.title}</span>  
+                <button onClick={() => handleEdit(todo.id, todo.title)}
+                className={styles.taskButtonSmall}
+                >Edit</button>
+              </>
             )}
-            <div className={styles.taskActions}>
-              {index === editIndex ? (
-                <>
-                  <button
-                    className={styles.taskButtonSmall}
-                    onClick={() => handleUpdateTask(index)}
-                  >
-                    Save
-                  </button>
-                  <button
-                    className={styles.taskButtonSmall}
-                    onClick={() => setEditIndex(-1)}
-                  >
-                    Cancel
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    className={styles.taskButtonSmall}
-                    onClick={() => handleEditTask(index)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className={styles.taskButtonSmall}
-                    onClick={() => handleDeleteTask(index)}
-                  >
-                    Delete
-                  </button>
-                </>
-              )}
-            </div>
+            <button onClick={() => handleDelete(todo.id)}
+            className={styles.taskButtonSmall}
+            >Delete</button>
           </li>
         ))}
       </ul>
     </div>
   );
-};
+}
 
 export default Task;
